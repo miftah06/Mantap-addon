@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="vpn1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/slowdns/ssh-vpn/vpn.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
