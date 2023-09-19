@@ -60,8 +60,8 @@ chmod +x /usr/local/bin/xray
 # Make Folder XRay
 mkdir -p /var/log/xray/
 
-wget -q -O /usr/local/bin/geosite.dat "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/geosite.dat"
-wget -q -O /usr/local/bin/geoip.dat "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/geoip.dat"
+wget -q -O /usr/local/bin/geosite.dat "https://github.com/miftah06/Mantap-addon/master/xray/geosite.dat"
+wget -q -O /usr/local/bin/geoip.dat "https://github.com/miftah06/Mantap-addon/master/xray/geoip.dat"
 
 # Daftar Lisensi
 

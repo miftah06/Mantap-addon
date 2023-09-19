@@ -172,3 +172,4 @@ apt update -y && apt upgrade -y && apt dist-upgrade -y && apt install git -y && 
 • Auto Fix
 
 • Auto update
+indo
