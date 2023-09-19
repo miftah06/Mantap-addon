@@ -1,4 +1,4 @@
-# Rizal AutoScriptSSH
+# Miftah AutoScriptSSH
 # Update dulu Bor
 
 <img src="https://img.shields.io/badge/Update%20Upgrade-green"> 
