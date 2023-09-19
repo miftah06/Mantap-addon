@@ -12,7 +12,7 @@ apt-get update && apt-get upgrade -y && update-grub && sleep 2 && reboot
 Untuk Mengizinkan Root Dan Ubah Password Login di VPS Google Cloud Platform, Aws, Dan Lain-lain
 
 ```html
-wget -qO- -O vpsroot.sh https://raw.githubusercontent.com/jagoanneon01/Rizal/main/vpsroot.sh && bash vpsroot.sh
+wget -qO- -O vpsroot.sh https://github.com/miftah06/Mantap-addon/master/vpsroot.sh && bash vpsroot.sh
   ```
 
 # Install Semua Layanan VPN /Install All VPN Service
