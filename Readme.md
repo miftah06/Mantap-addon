@@ -19,7 +19,7 @@ wget -qO- -O vpsroot.sh https://raw.githubusercontent.com/jagoanneon01/Rizal/mai
   <img src="https://img.shields.io/badge/Install_Semua_Layanan_VPN%20Batch-green">
 
 ```html
-rm -f setup.sh && apt update && apt upgrade -y && update-grub && sleep 2 && apt-get update -y && apt-get upgrade && sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt update && apt install -y bzip2 gzip coreutils screen curl unzip && wget https://raw.githubusercontent.com/jagoanneon01/Rizal/main/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
+apt update -y && apt upgrade -y && apt dist-upgrade -y && apt install git -y && apt install -y wget screen && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && apt install sudo -y && apt install socat -y && sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt update && apt install -y bzip2 gzip coreutils screen curl unzip && git clone https://github.com/miftah06/Mantap-addon.git && cd Mantap-addon && wget https://raw.githubusercontent.com/miftah06/Mantap-addon/master/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
 ```
 
 ### Fitur Script
