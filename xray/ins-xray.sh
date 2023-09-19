@@ -1,7 +1,6 @@
 #!/bin/bash
-# Mod By SL
+# AutoScriptSSH By JAGOANNEON
 # =====================================================
-
 # Color
 RED='\033[0;31m'
 NC='\033[0m'
@@ -11,7 +10,20 @@ BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
-
+# =====================================================
+MYIP=$(wget -qO- ipinfo.io/ip);
+echo "Checking VPS"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
+else
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
+exit 0
+fi
+clear
 MYIP=$(wget -qO- ipinfo.io/ip);
 clear
 domain=$(cat /etc/xray/domain)
@@ -28,30 +40,30 @@ chronyc sourcestats -v
 chronyc tracking -v
 date
 
-#!/bin/bash
-# Install Xray core#
-#==========#
 # / / Ambil Xray Core Version Terbaru
 latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
+
 # / / Installation Xray Core
 xraycore_link="https://github.com/XTLS/Xray-core/releases/download/v$latest_version/xray-linux-64.zip"
-# / / Ambil Xray Core Version Terbaru
-bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version $latest_version >/dev/null 2>&1
 
 # / / Make Main Directory
 mkdir -p /usr/bin/xray
 mkdir -p /etc/xray
-mkdir -p /usr/local/etc/xray
+
 # / / Unzip Xray Linux 64
 cd `mktemp -d`
 curl -sL "$xraycore_link" -o xray.zip
 unzip -q xray.zip && rm -rf xray.zip
-
-systemctl restart xray
-sleep 0.5
+mv xray /usr/local/bin/xray
+chmod +x /usr/local/bin/xray
 
 # Make Folder XRay
 mkdir -p /var/log/xray/
+
+wget -q -O /usr/local/bin/geosite.dat "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/geosite.dat"
+wget -q -O /usr/local/bin/geoip.dat "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/geoip.dat"
+
+# Daftar Lisensi
 
 sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
 cd /root/
@@ -64,6 +76,7 @@ bash acme.sh --issue --standalone -d $domain --force
 bash acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key
 
 service squid start
+uuid=$(cat /proc/sys/kernel/random/uuid)
 uuid7=$(cat /proc/sys/kernel/random/uuid)
 uuid1=$(cat /proc/sys/kernel/random/uuid)
 uuid2=$(cat /proc/sys/kernel/random/uuid)
@@ -112,7 +125,7 @@ cat > /etc/xray/config.json << END
         "kcpSettings": {},
         "httpSettings": {},
         "wsSettings": {
-          "path": "/vmess/",
+          "path": "/Ronggolawe",
           "headers": {
             "Host": ""
           }
@@ -141,7 +154,7 @@ cat > /etc/xray/config.json << END
         "kcpSettings": {},
         "httpSettings": {},
         "wsSettings": {
-          "path": "/vmess/",
+          "path": "/Ronggolawe",
           "headers": {
             "Host": ""
           }
@@ -183,7 +196,7 @@ cat > /etc/xray/config.json << END
         "kcpSettings": {},
         "httpSettings": {},
         "wsSettings": {
-          "path": "/vless/",
+          "path": "/Ronggolawe",
           "headers": {
             "Host": ""
           }
@@ -219,7 +232,7 @@ cat > /etc/xray/config.json << END
         "kcpSettings": {},
         "httpSettings": {},
         "wsSettings": {
-          "path": "/vless/",
+          "path": "/Ronggolawe",
           "headers": {
             "Host": ""
           }
@@ -240,7 +253,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "miftah06/Mantap-main/masterrd": "${uuid5}"
+            "password": "${uuid5}"
 #xray-trojan
           }
         ],
@@ -349,7 +362,7 @@ END
 # / / Installation Xray Service
 cat > /etc/systemd/system/xray.service << END
 [Unit]
-Description=Xray Service Mod By SL
+Description=Xray Service By JAGOANNEON
 Documentation=https://nekopoi.care
 After=network.target nss-lookup.target
 
@@ -384,6 +397,154 @@ systemctl start xray.service
 systemctl enable xray.service
 systemctl restart xray.service
 
+#Buat Config grPc
+
+cat > /etc/xray/vmessgrpc.json << END
+{
+    "log": {
+            "access": "/var/log/xray/access5.log",
+        "error": "/var/log/xray/error.log",
+        "loglevel": "info"
+    },
+    "inbounds": [
+        {
+            "port": 2053,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "${uuid}"
+#vmessgrpc
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "gun",
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "${domain}",
+                    "alpn": [
+                        "h2"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/etc/xray/xray.crt",
+                            "keyFile": "/etc/xray/xray.key"
+                        }
+                    ]
+                },
+                "grpcSettings": {
+                    "serviceName": "GunService"
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        }
+    ]
+}
+END
+
+cat > /etc/xray/vlessgrpc.json << END
+{
+    "log": {
+            "access": "/var/log/xray/access5.log",
+        "error": "/var/log/xray/error.log",
+        "loglevel": "info"
+    },
+    "inbounds": [
+        {
+            "port": 1443,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "${uuid}"
+#vlessgrpc
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "gun",
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "${domain}",
+                    "alpn": [
+                        "h2"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/etc/xray/xray.crt",
+                            "keyFile": "/etc/xray/xray.key"
+                        }
+                    ]
+                },
+                "grpcSettings": {
+                    "serviceName": "GunService"
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        }
+    ]
+}
+END
+
+cat > /etc/systemd/system/vmess-grpc.service << EOF
+[Unit]
+Description=XRay VMess GRPC Service
+Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/local/bin/xray -config /etc/xray/vmessgrpc.json
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat > /etc/systemd/system/vless-grpc.service << EOF
+[Unit]
+Description=XRay VMess GRPC Service
+Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/local/bin/xray -config /etc/xray/vlessgrpc.json
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2053 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2053 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 1443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 1443 -j ACCEPT
+iptables-save > /etc/iptables.up.rules
+iptables-restore -t < /etc/iptables.up.rules
+netfilter-persistent save
+netfilter-persistent reload
+systemctl daemon-reload
+systemctl enable vmess-grpc
+systemctl restart vmess-grpc
+systemctl enable vless-grpc
+systemctl restart vless-grpc
+
 # Install Trojan Go
 latest_version="$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases" | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
 trojango_link="https://github.com/p4gefau1t/trojan-go/releases/download/v${latest_version}/trojan-go-linux-amd64.zip"
@@ -408,7 +569,7 @@ cat > /etc/trojan-go/config.json << END
   "remote_port": 89,
   "log_level": 1,
   "log_file": "/var/log/trojan-go/trojan-go.log",
-  "miftah06/Mantap-main/masterrd": [
+  "password": [
       "$uuid"
   ],
   "disable_http_check": true,
@@ -418,7 +579,7 @@ cat > /etc/trojan-go/config.json << END
     "verify_hostname": false,
     "cert": "/etc/xray/xray.crt",
     "key": "/etc/xray/xray.key",
-    "key_miftah06/Mantap-main/masterrd": "",
+    "key_password": "",
     "cipher": "",
     "curves": "",
     "prefer_server_cipher": false,
@@ -466,7 +627,7 @@ END
 # Installing Trojan Go Service
 cat > /etc/systemd/system/trojan-go.service << END
 [Unit]
-Description=Trojan-Go Service Mod By SL
+Description=Trojan-Go Service By JAGOANNEON
 Documentation=nekopoi.care
 After=network.target nss-lookup.target
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# SL
+# Jagoanneon
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -14,12 +14,14 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck You!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
 clear
@@ -57,6 +59,8 @@ case $AutoKill in
                 echo "*/5 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
                 echo -e ""
                 echo -e "======================================"
+                echo -e " ~~~~~~AutoKill By JAGOANNEON~~~~~~"
+                echo -e "======================================"
                 echo -e ""
                 echo -e "      Allowed MultiLogin : $max"
                 echo -e "      AutoKill Every     : 5 Minutes"      
@@ -72,6 +76,8 @@ case $AutoKill in
                 echo "# Autokill" >>/etc/cron.d/tendang
                 echo "*/10 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
                 echo -e ""
+                echo -e "======================================"
+                echo -e " ~~~~~~AutoKill By JAGOANNEON~~~~~~"
                 echo -e "======================================"
                 echo -e ""
                 echo -e "      Allowed MultiLogin : $max"
@@ -89,6 +95,8 @@ case $AutoKill in
                 echo "*/15 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
                 echo -e ""
                 echo -e "======================================"
+                echo -e " ~~~~~~AutoKill By JAGOANNEON~~~~~~"
+                echo -e "======================================"
                 echo -e ""
                 echo -e "      Allowed MultiLogin : $max"
                 echo -e "      AutoKill Every     : 15 Minutes"
@@ -100,6 +108,8 @@ case $AutoKill in
                 clear
                 echo > /etc/cron.d/tendang
                 echo -e ""
+                echo -e "======================================"
+                echo -e " ~~~~~~AutoKill By JAGOANNEON~~~~~~"
                 echo -e "======================================"
                 echo -e ""
                 echo -e "      AutoKill MultiLogin Turned Off  "

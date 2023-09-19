@@ -19,11 +19,11 @@ mkdir -p /etc/shadowsocks
 rm -rf /usr/bin/shadowhost
 # shellcheck disable=SC2164
 cd /usr/bin
-wget -O addss-p "https://raw.githubusercontent.com/miftah06/Mantap-addon/master/shadowsocks-plugin/addss-p.sh"
+wget -O addss-p "https://raw.githubusercontent.com/miftah06/Mantap-main/master/shadowsocks-plugin/addss-p.sh"
 chmod +x addss-p
-#wget -O shadowhost "https://raw.githubusercontent.com/miftah06/Mantap-addon/master/shadowsocks-plugin/shadowhost.sh"
+#wget -O shadowhost "https://raw.githubusercontent.com/miftah06/Mantap-main/master/shadowsocks-plugin/shadowhost.sh"
 #chmod +x shadowhost && shadowhost
-wget -O delss "https://raw.githubusercontent.com/miftah06/Mantap-addon/master/shadowsocks/delss.sh"
+wget -O delss "https://raw.githubusercontent.com/miftah06/Mantap-main/master/shadowsocks/delss.sh"
 # shellcheck disable=SC2164
 cd
 # shellcheck disable=SC2034

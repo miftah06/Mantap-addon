@@ -1,5 +1,5 @@
 #!/bin/bash
-# SL
+# AutoScriptSSH By JAGOANNEON
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -11,22 +11,40 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
-
+# Izin Akses
+MYIP=$(wget -qO- ipinfo.io/ip);
+echo "Checking VPS"
+sleep 1
+echo "Cek Izin Akses Script"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
+else
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
+exit 0
+fi
 clear
 echo -e ""
-echo -e "======================================"
+echo -e "════════════════════════════" | lolcat
 echo -e ""
 echo -e "[1]. Change Port OpenVPN"
-echo -e "[2]. Change Port Wireguard"
-echo -e "[3]. Change Port Vmess + Vless"
-echo -e "[4]. Change Port Trojan"
-echo -e "[5]. Change Port Squid"
-echo -e "[6]. Change Port SSTP"
-echo -e "[7]. Change Port SSH WS HTTP"
-echo -e "[8]. Change Port SSH WS TLS / SSL"
-echo -e "[9]. Exit"
+echo -e "═════════════════" | lolcat
+echo -e "[2]. Change Port Vmess + Vless"
+echo -e "═════════════════" | lolcat
+echo -e "[3]. Change Port Trojan"
+echo -e "═════════════════" | lolcat
+echo -e "[4]. Change Port Squid"
+echo -e "═════════════════" | lolcat
+echo -e "[5]. Change Port SSH WS HTTP"
+echo -e "═════════════════" | lolcat
+echo -e "[6]. Change Port SSH WS TLS / SSL"
+echo -e "═════════════════" | lolcat
+echo -e "[0]. Exit"
 echo -e ""
-echo -e "======================================"
+echo -e "════════════════════════════" | lolcat
 echo -e ""
 read -p "Select From Options [ 1-7 ] : " port
 echo -e ""
@@ -35,27 +53,21 @@ case $port in
 portovpn
 ;;
 2)
-portwg
-;;
-3)
 portvlm
 ;;
-4)
+3)
 porttrojan
 ;;
-5)
+4)
 portsquid
 ;;
-6)
-portsstp
-;;
-7)
+5)
 portsshnontls
 ;;
-8)
+6)
 portsshws
 ;;
-9)
+0)
 clear
 menu
 ;;

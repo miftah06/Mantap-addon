@@ -5,6 +5,18 @@ NC='\e[0m'
 MYIP=$(wget -qO- ifconfig.me/ip);
 echo "Checking VPS"
 #EDIT IZIN
+MYIP=$(wget -qO- ipinfo.io/ip);
+echo "Checking VPS"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
+else
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
+exit 0
+fi
 clear
 echo -n > /tmp/other.txt
 data=( `cat /etc/xray/vmessgrpc.json | grep '^###' | cut -d ' ' -f 2`);

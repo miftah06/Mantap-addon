@@ -1,5 +1,5 @@
 #!/bin/bash
-# SL
+# Jagoanneon
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -14,12 +14,14 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck You!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
 clear
@@ -61,6 +63,6 @@ oth=$(cat /tmp/other.txt | sort | uniq | nl)
 echo "other";
 echo "$oth";
 echo "------------------------------------";
-echo "Script Mod By SL"
+echo "Script By JAGOANNEON"
 rm -rf /tmp/other.txt
 

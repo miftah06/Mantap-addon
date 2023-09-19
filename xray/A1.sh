@@ -41,7 +41,6 @@ mkdir -p /usr/bin/xray
 mkdir -p /etc/xray
 
 # / / Unzip Xray Linux 64
-# shellcheck disable=SC2046
 cd `mktemp -d`
 curl -sL "$xraycore_link" -o xray.zip
 unzip -q xray.zip && rm -rf xray.zip

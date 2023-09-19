@@ -1,5 +1,5 @@
 #!/bin/bash
-# SL
+# Jagoanneon
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -11,15 +11,19 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
-# Getting
+# Izin Akses
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+sleep 1
+echo "Cek Izin Akses Script"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck You!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
 clear
@@ -49,7 +53,7 @@ echo "  Done Install Webmin  "
 echo "======================="
 echo "http://$IP:10000"
 echo "======================="
-echo "Script By LamVpn"
+echo "Script By JAGOANNEON"
 }
 function restart () {
 echo " Restarting Webmin"
@@ -61,7 +65,7 @@ echo ""
 echo "======================="
 echo "  Done Restart Webmin  "
 echo "======================="
-echo "Script By LamVpn"
+echo "Script By JAGOANNEON"
 }
 function uninstall () {
 echo " Removing Repositori Webmin"
@@ -76,7 +80,7 @@ echo ""
 echo "========================="
 echo "  Done Uninstall Webmin  "
 echo "========================="
-echo "Script By LamVpn"
+echo "Script By JAGOANNEON"
 }
 if [[ "$cek" = "perl" ]]; then
 sts="${Info}"

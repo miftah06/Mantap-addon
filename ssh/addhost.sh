@@ -10,10 +10,21 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
-# Getting
+# Izin Akses
 MYIP=$(wget -qO- ipinfo.io/ip);
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-
+echo "Checking VPS"
+sleep 1
+echo "Cek Izin Akses Script"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
+else
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
+exit 0
+fi
 clear
 read -rp "Domain/Host : " -e domain
 echo "IP=$domain" >>/var/lib/crot/ipvps.conf

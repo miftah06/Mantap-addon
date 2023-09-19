@@ -1,7 +1,7 @@
 # ==========================================
 # Getting
 #!/bin/bash
-# SL
+# Jagoanneon
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -16,16 +16,18 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck you!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
 clear
-NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/sl-vmessgrpc.json")
+NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/vmessgrpc.json")
 	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
 		clear
 		echo ""
@@ -38,7 +40,7 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/sl-vmessgrpc.json")
 	echo "Select the existing client you want to renew"
 	echo " Press CTRL+C to return"
 	echo -e "==============================="
-	grep -E "^### " "/etc/xray/sl-vmessgrpc.json" | cut -d ' ' -f 2-3 | nl -s ') '
+	grep -E "^### " "/etc/xray/vmessgrpc.json" | cut -d ' ' -f 2-3 | nl -s ') '
 	until [[ ${CLIENT_NUMBER} -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
 		if [[ ${CLIENT_NUMBER} == '1' ]]; then
 			read -rp "Select one client [1]: " CLIENT_NUMBER
@@ -47,27 +49,34 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/sl-vmessgrpc.json")
 		fi
 	done
 read -p "Expired (Days): " masaaktif
-user=$(grep -E "^### " "/etc/xray/sl-vmessgrpc.json" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
-exp=$(grep -E "^### " "/etc/xray/sl-vmessgrpc.json" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
-user=$(grep -E "^### " "/etc/xray/sl-vlessgrpc.json" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
-exp=$(grep -E "^### " "/etc/xray/sl-vlessgrpc.json" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
+user=$(grep -E "^### " "/etc/xray/vmessgrpc.json" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
+exp=$(grep -E "^### " "/etc/xray/vmessgrpc.json" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
+user=$(grep -E "^### " "/etc/xray/vlessgrpc.json" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
+exp=$(grep -E "^### " "/etc/xray/vlessgrpc.json" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
 now=$(date +%Y-%m-%d)
 d1=$(date -d "$exp" +%s)
 d2=$(date -d "$now" +%s)
 exp2=$(( (d1 - d2) / 86400 ))
 exp3=$(($exp2 + $masaaktif))
 exp4=`date -d "$exp3 days" +"%Y-%m-%d"`
-sed -i "s/### $user $exp/### $user $exp4/g" /etc/xray/sl-vmessgrpc.json
-sed -i "s/### $user $exp/### $user $exp4/g" /etc/xray/sl-vlessgrpc.json
-systemctl restart sl-vmess-grpc.service
-systemctl restart sl-vless-grpc.service
+sed -i "s/### $user $exp/### $user $exp4/g" /etc/xray/vmessgrpc.json
+sed -i "s/### $user $exp/### $user $exp4/g" /etc/xray/vlessgrpc.json
+systemctl restart vmess-grpc.service
+systemctl restart vless-grpc.service
 service cron restart
 clear
 echo ""
-echo "==============================="
+echo -e "══════════════════════" | lolcat
 echo "  XRAY Vmess gRPC/Vless gRPC Account Renewed  "
-echo "==============================="
+echo -e "══════════════════════" | lolcat
 echo "Username  : $user"
 echo "Expired   : $exp4"
-echo "==============================="
-echo "Script Mof By SL"
+echo -e "══════════════════════" | lolcat
+echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
+echo -e "══════════════════════" | lolcat
+echo -e""
+read -p "Ketik Enter Untuk Kembali Ke Menu...."
+sleep 1
+menu
+exit 0
+fi

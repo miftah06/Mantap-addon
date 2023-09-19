@@ -1,5 +1,5 @@
 #!/bin/bash
-#warna
+#AutoScript By JAGOANNEON
 # ==========================================
 # Color
 RED='\033[0;31m'

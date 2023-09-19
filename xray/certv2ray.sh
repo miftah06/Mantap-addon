@@ -11,6 +11,18 @@ CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
 # Getting
+MYIP=$(wget -qO- ipinfo.io/ip);
+echo "Checking VPS"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
+else
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
+exit 0
+fi
 clear
 echo start
 sleep 0.5
@@ -23,7 +35,7 @@ bash acme.sh --install
 rm acme.sh
 cd .acme.sh
 echo "starting...., Port 80 Akan di Hentikan Saat Proses install Cert"
-bash acme.sh --register-account -m izharuddinmiftah@gmail.com
+bash acme.sh --register-account -m rohmatimron002@gmail.com
 bash acme.sh --issue --standalone -d $domain --force
 bash acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key
 

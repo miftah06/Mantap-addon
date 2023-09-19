@@ -1,7 +1,6 @@
 #!/bin/bash
 # ==========================================
 # Color
-# shellcheck disable=SC2034
 RED='\033[0;31m'
 NC='\033[0m'
 GREEN='\033[0;32m'
@@ -15,16 +14,16 @@ LIGHT='\033[0;37m'
 MYIP=$(wget -qO- ipinfo.io/ip);
 # ==================================================
 # Link Hosting Kalian
-akbarvpn=""raw.githubusercontent.com/miftah06/Mantap-main/master/ssh
+akbarvpn="raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh"
 
 # Link Hosting Kalian Untuk Xray
-akbarvpnn="raw.githubusercontent.com/miftah06/Mantap-main/master/xray"
+akbarvpnn="raw.githubusercontent.com/jagoanneon01/Rizal/main/xray"
 
 # Link Hosting Kalian Untuk Trojan Go
-akbarvpnnn="raw.githubusercontent.com/miftah06/Mantap-main/master/trojango"
+akbarvpnnn="raw.githubusercontent.com/jagoanneon01/Rizal/main/trojango"
 
 # Link Hosting Kalian Untuk Stunnel5
-akbarvpnnnn="raw.githubusercontent.com/miftah06/Mantap-main/master/stunnel5"
+akbarvpnnnn="raw.githubusercontent.com/jagoanneon01/Rizal/main/stunnel5"
 
 # initializing var
 export DEBIAN_FRONTEND=noninteractive
@@ -38,10 +37,10 @@ ver=$VERSION_ID
 country=ID
 state=Indonesia
 locality=Indonesia
-organization=akbarstorevpn
-organizationalunit=akbarstorevpn
-commonname=akbarstorevpn
-email=akbarssh21@gmail.com
+organization=www.jagoanneon-premium.me
+organizationalunit=www.jagoanneon-premium.me
+commonname=www.jagoanneon-premium.me
+email=admin@jagoanneon-premium.me
 
 cd
 

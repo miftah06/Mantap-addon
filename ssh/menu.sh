@@ -1,298 +1,310 @@
 #!/bin/bash
+merah="\e[1;31m"
+hijau="\e[1;32m"
+kuning="\e[1;33m"
+biru="\e[1;34m"
+putih="\e[1;37m"
+cyan="\e[1;36m"
+NC="\e[1;37m"
 clear
-m="\033[0;1;36m"
-y="\033[0;1;37m"
-yy="\033[0;1;32m"
-yl="\033[0;1;33m"
-wh="\033[0m"
+if [[ -e /etc/debian_version ]]; then
+	OS=debian
+	RCLOCAL='/etc/rc.local'
+elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
+	OS=centos
+	RCLOCAL='/etc/rc.d/rc.local'
+	chmod +x /etc/rc.d/rc.local
+else
+	echo "It looks like you are not running this installer on Debian, Ubuntu or Centos system"
+	exit
+fi
+color3='\e[031;1m'
+color2='\e[34;1m'
+color3='\e[0m'
+ISP=$(curl -s ipinfo.io/org | cut -d " " -f 2-10 )
+CITY=$(curl -s ipinfo.io/city )
+WKT=$(curl -s ipinfo.io/timezone )
+IPVPS=$(curl -s ipv4.icanhazip.com )
+	
+	echo " "
+	cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
+	cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
+	freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
+	tram=$( free -m | awk 'NR==2 {print $2}' )
+	swap=$( free -m | awk 'NR==4 {print $2}' )
+	up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
 
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$y             Telegram : jembot $wh"
-echo -e "$y           Premium Auto Script By jembot $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo ""
-echo -e "$y SSH & OpenVPN $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 1$y.Create SSH & OpenVPN Account"
-echo -e "$yy 2$y.Generate SSH & OpenVPN Trial Account"
-echo -e "$yy 3$y.Extending SSH & OpenVPN Account Active Life"
-echo -e "$yy 4$y.Check User Login SSH & OpenVPN"
-echo -e "$yy 5$y.Daftar Member SSH & OpenVPN"
-echo -e "$yy 6$y.Delete SSH & OpenVpn Account"
-echo -e "$yy 7$y.Delete User Expired SSH & OpenVPN"
-echo -e "$yy 8$y.Set up Autokill SSH"
-echo -e "$yy 9$y.Displays Users Who Do Multi Login SSH"
-echo -e "$yy 10$y.Restart All Service"
+        echo -e  " ${cyan}╠════════════════════════════════════════════════════════════╣${NC}"
+    echo -e  " ║                    ┃ JAGOANNEON - VPN ┃                    ║" | lolcat
+    echo -e  " ${cyan}╠════════════════════════════════════════════════════════════╝${NC}"
+	echo -e " ║ ${merah}CPU Model${NC}${putih}:${NC} $cname"
+	echo -e " ║ ${merah}Number Of Cores${NC}${putih}:${NC} $cores"
+	echo -e " ║ ${merah}CPU Frequency${NC}${putih}:${NC} $freq MHz"
+	echo -e " ║ ${merah}Total Amount Of RAM${NC}${putih}:${NC} $tram MB"
+	echo -e " ║ ${merah}Total Amount Of Swap${NC}${putih}:${NC} $swap MB"
+	echo -e " ║ ${merah}System Uptime${putih}:${NC} $up"
+	echo -e " ║ ${merah}Isp Name${NC}${putih}:${NC} $ISP"
+	echo -e " ║ ${merah}City${NC}${putih}:${NC} $CITY"
+	echo -e " ║ ${merah}Time${NC}${putih}:${NC} $WKT"
+	echo -e " ║ ${merah}IPVPS${NC}${putih}:${NC} $IPVPS"
+        echo -e " ║ ${merah}WhatsApp${NC}${putih}:${NC} ${hijau}wa.me/+6283857684916${NC}"
+        echo -e " ║ ${merah}Facebook${NC}${putih}:${NC} ${biru}Generasi Ronggolawe Tuban${NC}"
+        echo -e " ${cyan}╠════════════════════════════════════════════════════════════╝${NC}"
+	date | lolcat
+	echo -e "-----------------------------------------------------"
 echo -e ""
-echo -e "$y L2TP $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 11$y.Create Account L2TP"
-echo -e "$yy 12$y.Delete Account L2TP"
-echo -e "$yy 13$y.Extending Account L2TP Active Life"
+echo -e  " ${cyan}╠════════════════════════════════════════════════════════════╣${NC}"
+echo -e  " ║                       ┃ MENU OPTIONS ┃                     ║" |lolcat
+echo -e  " ${cyan}╠════════════════════════════════════════════════════════════╝${NC}"
+
+echo -e " 0.)  Control Panel Trial"
+
+echo -e " 1.)  Control Panel SSH & OVPN"
+
+echo -e " 2.)  Control Panel Vmess-V2ray"
+
+echo -e " 3.)  Control Panel Vless"
+
+echo -e " 4.)  Control Panel Trojan-GFW"
+
+echo -e " 5.)  Control Panel Trojan-GO"
+
+echo -e " 99.)  Control Panel GRPC"
+
 echo -e ""
-echo -e "$y PPTP $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 14$y.Create Account PPTP"
-echo -e "$yy 15$y.Delete Account PPTP"
-echo -e "$yy 16$y.Extending Account PPTP Active Life"
+echo -e  " ${cyan}╠════════════════════════════════════════════════════════════╣${NC}"
+echo -e  " ║                       ┃ SYSTEM MENU ┃                      ║" | lolcat 
+echo -e  " ${cyan}╠════════════════════════════════════════════════════════════╝${NC}"
+
+echo -e " 6.)  Add Subdomain Host For VPS"
+
+echo -e " 7.)  Renew Certificate V2RAY"
+
+echo -e " 8.)  Change Port All Account"
+
+echo -e " 9.)  Autobackup Data VPS"
+
+echo -e " 10.)  Backup Data VPS"
+
+echo -e " 11.)  Restore Data VPS"
+
+echo -e " 12.)  Webmin Menu"
+
+echo -e " 13.)  Limit Bandwith Speed Server"
+
+echo -e " 14.)  Check Usage of VPS Ram"
+
+echo -e " 15.)  Reboot VPS"
+
+echo -e " 16.)  Speedtest VPS"
+
+echo -e " 17.)  Information Display System"
+
+echo -e " 18.)  Info Script Auto Install"
+
+echo -e " 19.)  Restart All Service"
+
+echo -e " 20.)  Set Auto Reboot"
+
+echo -e " 21.)  Set Multi Login Akun"
+
 echo -e ""
-echo -e "$y SSTP $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 17$y.Create Account SSTP"
-echo -e "$yy 18$y.Delete Account SSTP"
-echo -e "$yy 19$y.Extending Account SSTP Active Life"
-echo -e "$yy 20$y.Check User Login SSTP"
+echo -e  " ${cyan}╠════════════════════════════════════════════════════════════╣${NC}"
+echo -e  " ║                       ┃ DOMAIN MENU ┃                      ║" | lolcat 
+echo -e  " ${cyan}╠════════════════════════════════════════════════════════════╝${NC}"
+
+echo -e " 22.)  Wilcard Domain"
+
+echo -e " 23.)  Status Tunneling"
+
+echo -e " 24.)  Auto Pointing IP"
+
+echo -e " 25.)  Informasi Sistem Port VPN"
+
+echo -e  "  ╠═════════════════════════════════════════════════════╣" | lolcat
+echo -e  "  ║   x.) Exit Menu .                                             ║" | lolcat
+echo -e  "  ║     GANBATTEO ONIICAN, POWERED BY JAGOANNEON.                 ║" | lolcat
+echo -e  "  ╚═════════════════════════════════════════════════════╝" | lolcat
 echo -e ""
-echo -e "$y WIREGUARD $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 21$y.Create Account Wireguard"
-echo -e "$yy 22$y.Delete Account Wireguard"
-echo -e "$yy 23$y.Extending Account Wireguard Active Life"
+
+read -p "     Please Input Number  [1-31 or x] :  "  num
+
 echo -e ""
-echo -e "$y SHADOWSOCKS $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 24$y.Create Account Shadowsocks"
-echo -e "$yy 25$y.Delete Account Shadowsocks"
-echo -e "$yy 26$y.Extending Account Shadowsocks Active Life"
-echo -e "$yy 27$y.Check User Login Shadowsocks"
-echo -e ""
-echo -e "$y SHADOWSOCKSR $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 28$y.Create Account SSR"
-echo -e "$yy 29$y.Delete Account SSR"
-echo -e "$yy 30$y.Extending Account SSR Active Life"
-echo -e "$yy 31$y.Show Other SSR Menu"
-echo -e ""
-echo -e "$y XRAYS / VMESS $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 32$y.Create Account XRAYS Vmess Websocket"
-echo -e "$yy 33$y.Delete Account XRAYS Vmess Websocket"
-echo -e "$yy 34$y.Extending Account XRAYS Vmess Active Life"
-echo -e "$yy 35$y.Check User Login XRAYS Vmess"
-echo -e "$yy 36$y.Renew Certificate XRAYS Account"
-echo -e ""
-echo -e "$y XRAYS / VLESS $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 37$y.Create Account XRAYS Vless Websocket"
-echo -e "$yy 38$y.Delete Account XRAYS Vless Websocket"
-echo -e "$yy 39$y.Extending Account XRAYS Vless Active Life"
-echo -e "$yy 40$y.Check User Login XRAYS Vless"
-echo -e ""
-echo -e "$y XRAYS / TROJAN $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 41$y.Create Account XRAYS Trojan"
-echo -e "$yy 42$y.Delete Account XRAYS Trojan"
-echo -e "$yy 43$y.Extending Account XRAYS Trojan Active Life"
-echo -e "$yy 44$y.Check User Login XRAYS Trojan"
-echo -e ""
-echo -e "$y TROJAN GO $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 45$y.Create Account Trojan Go"
-echo -e "$yy 46$y.Delete Account Trojan Go"
-echo -e "$yy 47$y.Extending Account Trojan Go Active Life"
-echo -e "$yy 48$y.Check User Login Trojan Go"
-echo ""
-echo -e "$y SYSTEM $wh"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e "$yy 49$y.Add Or Change Subdomain Host For VPS"
-echo -e "$yy 50$y.Change Port Of Some Service"
-echo -e "$yy 51$y.Autobackup Data VPS"
-echo -e "$yy 52$y.Backup Data VPS"
-echo -e "$yy 53$y.Restore Data VPS"
-echo -e "$yy 54$y.Webmin Menu"
-echo -e "$yy 55$y.Limit Bandwith Speed Server"
-echo -e "$yy 56$y.Check Usage of VPS Ram"
-echo -e "$yy 57$y.Reboot VPS"
-echo -e "$yy 58$y.Speedtest VPS"
-echo -e "$yy 59$y.Displaying System Information"
-echo -e "$yy 60$y.Info Script Auto Install"
-echo -e "$y-------------------------------------------------------------$wh"
-echo -e ""
-read -p "Select From Options [ 1 - 60 ] : " menu
-echo -e ""
-case $menu in
+
+case $num in
+
+0)
+
+trial-menu
+
+;;
+
 1)
-addssh
+
+tessh
+
 ;;
+
 2)
-trialssh
+
+wss
+
 ;;
+
 3)
-renewssh
+
+vls
+
 ;;
+
 4)
-cekssh
+
+trj
+
 ;;
+
 5)
-member
+
+trjgo
+
 ;;
+
 6)
-delssh
-;;
-7)
-delexp
-;;
-8)
-autokill
-;;
-9)
-ceklim
-;;
-10)
-restart
-;;
-11)
-addl2tp
-;;
-12)
-dell2tp
-;;
-13)
-renewl2tp
-;;
-14)
-addpptp
-;;
-15)
-delpptp
-;;
-16)
-renewpptp
-;;
-17)
-addsstp
-;;
-18)
-delsstp
-;;
-19)
-renewsstp
-;;
-20)
-ceksstp
-;;
-21)
-addwg
-;;
-22)
-delwg
-;;
-23)
-renewwg
-;;
-24)
-addss
-;;
-25)
-delss
-;;
-26)
-renewss
-;;
-27)
-cekss
-;;
-28)
-addssr
-;;
-29)
-delssr
-;;
-30)
-renewssr
-;;
-31)
-ssr
-;;
-32)
-addvmess
-;;
-33)
-delvmess
-;;
-34)
-renewvmess
-;;
-35)
-cekvmess
-;;
-36)
-certv2ray
-;;
-37)
-addvless
-;;
-38)
-delvless
-;;
-39)
-renewvless
-;;
-40)
-cekvless
-;;
-41)
-addtrojan
-;;
-42)
-deltrojan
-;;
-43)
-renewtrojan
-;;
-44)
-cektrojan
-;;
-45)
-addtrgo
-;;
-46)
-deltrgo
-;;
-47)
-renewtrgo
-;;
-48)
-cektrgo
-;;
-49)
+
 addhost
+
 ;;
-50)
+
+7)
+
+certv2ray
+
+;;
+
+8)
+
 changeport
+
 ;;
-51)
+
+9)
+
 autobackup
+
 ;;
-52)
+
+10)
+
 backup
+
 ;;
-53)
+
+11)
+
 restore
+
 ;;
-54)
-wbmn
+
+12)
+
+webmin
+
 ;;
-55)
+
+13)
+
 limitspeed
+
 ;;
-56)
+
+14)
+
 ram
+
 ;;
-57)
+
+15)
+
 reboot
+
 ;;
-58)
+
+16)
+
 speedtest
+
 ;;
-59)
+
+17)
+
 info
+
 ;;
-60)
+
+18)
+
 about
+
 ;;
+
+19)
+
+restart
+
+;;
+
+20)
+
+reboot
+
+;;
+
+21)
+
+autokill
+
+;;
+
+22)
+
+wilcard
+
+;;
+
+23)
+
+running
+
+;;
+
+24)
+
+wget https://raw.githubusercontent.com/jagoanneon01/Rizal/main/cf.sh && chmod +x cf.sh && ./cf.sh
+
+;;
+
+25)
+
+nano log-install.txt
+
+;;
+
+99)
+
+grpcc
+
+;;
+
+x)
+
+exit
+
+;;
+
 *)
-clear
-menu
+
+echo "Please enter an correct number"
+
 ;;
+
 esac

@@ -11,28 +11,28 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
-# Getting
+# Izin Akses
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+sleep 1
+echo "Cek Izin Akses Script"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck You!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
 clear
 apt install jq curl -y
-###DOM#AIN=installer.my.id
-DOMAIN=slxray.cf
+DOMAIN=installer.my.id
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c6)
-SUB_DOMAIN=${sub}.slxray.cf
-CF_ID=slinfinity69@gmail.com
-CF_KEY=3dcb550a77cb0a64dacf205243e3ac550f9db
-##SUB_DOMAIN=${sub}.installer.my.id
-##CF_ID=senowahyu62@gmail.com
-##CF_KEY=84570683099becbeb0f04d8086ce6f309c56c
+SUB_DOMAIN=${sub}.vpn-premium.me
+CF_ID=rohmatimron002@gmail.com
+CF_KEY=4dbce4746bd57c052c9fef9af8d19b1758780
 set -euo pipefail
 IP=$(wget -qO- ipinfo.io/ip);
 echo "Updating DNS for ${SUB_DOMAIN}..."

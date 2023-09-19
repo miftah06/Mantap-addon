@@ -22,6 +22,19 @@ echo "$SUB_DOMAIN" >> /etc/v2ray/domain
 # Getting
 #clear
 #echo start
+#sleep 0.5
+#source /var/lib/crot/ipvps.conf
+#domain=$(cat /etc/xray/domain)
+#sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
+#cd /root/
+#wget -O acme.sh https://raw.githubusercontent.com/acmesh-official/acme.sh/master/acme.sh
+#bash acme.sh --install
+#rm acme.sh
+#cd .acme.sh
+#echo "starting...., Port 80 Akan di Hentikan Saat Proses install Cert"
+#bash acme.sh --register-account -m izharuddinmiftah@gmail.com
+#bash acme.sh --issue --standalone -d $domain --force
+#bash acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key
 #sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 #subsl=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 # shellcheck disable=SC1007
@@ -31,8 +44,8 @@ SUB_DOMAIN=$ echo -n "Enter Your Host/subdomain again: "
             read SUB_DOMAIN
 NS_DOMAIN=$ echo -n "Enter Your SLOWDNSHOST/Sub in subdomain ex:dns.indo.qqgl.cu: "
               read NS_DOMAIN
-CF_ID=eb9851ec9c1f1597dffa745472e33984
-CF_KEY=65eed4ccfa099a23b912627ec0190c4356d05
+CF_ID=izharuddinmiftah@gmail.com
+CF_KEY=3292a1a8e44719e55d1af536eab5d4700be26
 set -euo pipefail
 IP=$(wget -qO- icanhazip.com);
 echo "Updating DNS for ${SUB_DOMAIN}..."
@@ -83,19 +96,6 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
      --data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${SUB_DOMAIN}'","ttl":120,"proxied":false}')
-sleep 0.5
-source /var/lib/crot/ipvps.conf
-domain=$(cat /etc/xray/domain)
-sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
-cd /root/
-wget -O acme.sh https://raw.githubusercontent.com/acmesh-official/acme.sh/master/acme.sh
-bash acme.sh --install
-rm acme.sh
-cd .acme.sh
-#echo "starting...., Port 80 Akan di Hentikan Saat Proses install Cert"
-bash acme.sh --register-account -m izharuddinmiftah@gmail.com
-bash acme.sh --issue --standalone -d $domain --force
-bash acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key
 rm -rf /etc/xray/domain
 rm -rf /root/nsdomain
 echo "IP=""$SUB_DOMAIN" >> /var/lib/crot/ipvps.conf

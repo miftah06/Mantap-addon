@@ -1,7 +1,7 @@
 # ==========================================
 # Getting
 #!/bin/bash
-# SL
+# Jagoanneon
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -16,12 +16,14 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck you!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
 clear
@@ -64,10 +66,17 @@ systemctl restart vless-grpc.service
 service cron restart
 clear
 echo ""
-echo "==============================="
-echo "  XRAY Vmess/Vless gRPC Account Renewed  "
-echo "==============================="
+echo -e "══════════════════════" | lolcat
+echo "  XRAY Vmess gRPC/Vless gRPC Account Renewed  "
+echo -e "══════════════════════" | lolcat
 echo "Username  : $user"
 echo "Expired   : $exp4"
-echo "==============================="
-echo "Script Mof By SL"
+echo -e "══════════════════════" | lolcat
+echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
+echo -e "══════════════════════" | lolcat
+echo -e""
+read -p "Ketik Enter Untuk Kembali Ke Menu...."
+sleep 1
+menu
+exit 0
+fi

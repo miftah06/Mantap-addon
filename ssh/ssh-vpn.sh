@@ -13,18 +13,6 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 # ==================================================
-# Link Hosting Kalian
-akbarvpn="raw.githubusercontent.com/miftah06/Mantap-addon/main/ssh"
-
-# Link Hosting Kalian Untuk Xray
-akbarvpnn="raw.githubusercontent.com/miftah06/Mantap-addon/main/xray"
-
-# Link Hosting Kalian Untuk Trojan Go
-akbarvpnnn="raw.githubusercontent.com/miftah06/Mantap-addon/main/trojango"
-
-# Link Hosting Kalian Untuk Stunnel5
-akbarvpnnnn="raw.githubusercontent.com/miftah06/Mantap-addon/main/stunnel5"
-
 # initializing var
 export DEBIAN_FRONTEND=noninteractive
 MYIP=$(wget -qO- ipinfo.io/ip);
@@ -37,10 +25,10 @@ ver=$VERSION_ID
 country=ID
 state=Indonesia
 locality=Indonesia
-organization=infinity
-organizationalunit=infinity
-commonname=localhost
-email=hayuk69@gmail.com
+organization=www.jagoanneon-premium.me
+organizationalunit=www.jagoanneon-premium.me
+commonname=www.jagoanneon-premium.me
+email=admin@jagoanneon-premium.me
 
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://${akbarvpn}/password"
@@ -96,7 +84,9 @@ apt -y install wget curl
 apt -y install net-tools
 
 # Install Requirements Tools
-apt install ruby -y
+apt-get install figlet -y
+apt-get install ruby -y
+gem install lolcat
 apt install python -y
 apt install make -y
 apt install cmake -y
@@ -138,23 +128,20 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
 echo "clear" >> .profile
 echo "neofetch" >> .profile
+echo "echo SELAMAT DATANG DI AUTOSCRIPT PREMIUM" >> .profile
+echo "echo SCRIPT PREMIUM BY JAGOANNEON" >> .profile
+echo "echo CONTACT PERSON WHATSAPP : wa.me/+6283857684916" >> .profile
+echo "echo Ketik menu Untuk Menampilkan Daftar Perintah..." >> .profile
 
 # install webserver
-apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
+apt -y install nginx
+cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-curl https://${akbarvpn}/nginx.conf > /etc/nginx/nginx.conf
-curl https://${akbarvpn}/vps.conf > /etc/nginx/conf.d/vps.conf
-sed -i 's/listen = \/var\/run\/php-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/fpm/pool.d/www.conf
-useradd -m vps;
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/nginx.conf"
 mkdir -p /home/vps/public_html
-echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
-chown -R www-data:www-data /home/vps/public_html
-chmod -R g+rw /home/vps/public_html
-cd /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://${akbarvpn}/index.html1"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/vps.conf"
 /etc/init.d/nginx restart
-cd
 
 # install badvpn
 cd
@@ -184,11 +171,11 @@ echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
 
-# install squid (proxy nya aku matikan)
+# install squid
 cd
-#apt -y install squid3
-#wget -O /etc/squid/squid.conf "https://${akbarvpn}/squid3.conf"
-#sed -i $MYIP2 /etc/squid/squid.conf
+apt -y install squid3
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/squid3.conf"
+sed -i $MYIP2 /etc/squid/squid.conf
 
 # Install SSLH
 apt -y install sslh
@@ -371,153 +358,144 @@ netfilter-persistent reload
 
 # download script
 cd /usr/bin
-wget -O addhost "https://${akbarvpn}/addhost.sh"
-wget -O slhost "https://${akbarvpn}/slhost.sh"
-wget -O about "https://${akbarvpn}/about.sh"
-wget -O menu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/menu.sh"
-wget -O addssh "https://${akbarvpn}/addssh.sh"
-wget -O trialssh "https://${akbarvpn}/trialssh.sh"
-wget -O delssh "https://${akbarvpn}/delssh.sh"
-wget -O member "https://${akbarvpn}/member.sh"
-wget -O delexp "https://${akbarvpn}/delexp.sh"
-wget -O cekssh "https://${akbarvpn}/cekssh.sh"
-wget -O restart "https://${akbarvpn}/restart.sh"
-wget -O speedtest "https://${akbarvpn}/speedtest_cli.py"
-wget -O info "https://${akbarvpn}/info.sh"
-wget -O ram "https://${akbarvpn}/ram.sh"
-wget -O renewssh "https://${akbarvpn}/renewssh.sh"
-wget -O autokill "https://${akbarvpn}/autokill.sh"
-wget -O ceklim "https://${akbarvpn}/ceklim.sh"
-wget -O tendang "https://${akbarvpn}/tendang.sh"
-wget -O clearlog "https://${akbarvpn}/clearlog.sh"
-wget -O changeport "https://${akbarvpn}/changeport.sh"
-wget -O portovpn "https://${akbarvpn}/portovpn.sh"
-wget -O portwg "https://${akbarvpn}/portwg.sh"
-wget -O porttrojan "https://${akbarvpn}/porttrojan.sh"
-wget -O portsstp "https://${akbarvpn}/portsstp.sh"
-wget -O portsquid "https://${akbarvpn}/portsquid.sh"
-wget -O portvlm "https://${akbarvpn}/portvlm.sh"
-wget -O wbmn "https://${akbarvpn}/webmin.sh"
-wget -O xp "https://${akbarvpn}/xp.sh"
-wget -O swapkvm "https://${akbarvpn}/swapkvm.sh"
-wget -O addvmess "https://${akbarvpnn}/addv2ray.sh"
-wget -O addvless "https://${akbarvpnn}/addvless.sh"
-wget -O addtrojan "https://${akbarvpnn}/addtrojan.sh"
-wget -O addgrpc "https://${akbarvpnn}/addgrpc.sh"
-wget -O cekgrpc "https://${akbarvpnn}/cekgrpc.sh"
-wget -O delgrpc "https://${akbarvpnn}/delgrpc.sh"
-wget -O renewgrpc "https://${akbarvpnn}/renewgrpc.sh"
-wget -O delvmess "https://${akbarvpnn}/delv2ray.sh"
-wget -O delvless "https://${akbarvpnn}/delvless.sh"
-wget -O deltrojan "https://${akbarvpnn}/deltrojan.sh"
-wget -O cekvmess "https://${akbarvpnn}/cekv2ray.sh"
-wget -O cekvless "https://${akbarvpnn}/cekvless.sh"
-wget -O cektrojan "https://${akbarvpnn}/cektrojan.sh"
-wget -O renewvmess "https://${akbarvpnn}/renewv2ray.sh"
-wget -O renewvless "https://${akbarvpnn}/renewvless.sh"
-wget -O renewtrojan "https://${akbarvpnn}/renewtrojan.sh"
-wget -O certv2ray "https://${akbarvpnn}/certv2ray.sh"
-wget -O addtrgo "https://${akbarvpnnn}/addtrgo.sh"
-wget -O deltrgo "https://${akbarvpnnn}/deltrgo.sh"
-wget -O renewtrgo "https://${akbarvpnnn}/renewtrgo.sh"
-wget -O cektrgo "https://${akbarvpnnn}/cektrgo.sh"
-wget -O portsshnontls "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/websocket/portsshnontls.sh"
-wget -O portsshws "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/websocket/portsshws.sh"
 
-wget -O ipsaya "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/ipsaya.sh"
-wget -O sshovpnmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/sshovpn.sh"
-wget -O l2tpmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/l2tpmenu.sh"
-wget -O pptpmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/pptpmenu.sh"
-wget -O sstpmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/sstpmenu.sh"
-wget -O wgmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/wgmenu.sh"
-wget -O ssmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/ssmenu.sh"
-wget -O ssrmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/ssrmenu.sh"
-wget -O vmessmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/vmessmenu.sh"
-wget -O vlessmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/vlessmenu.sh"
-wget -O grpcmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/grpcmenu.sh"
-wget -O grpcupdate "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/grpcupdate.sh"
-wget -O trmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/trmenu.sh"
-wget -O trgomenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/trgomenu.sh"
-wget -O setmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/setmenu.sh"
-wget -O slowdnsmenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/slowdnsmenu.sh"
-wget -O running "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/running.sh"
-wget -O updatemenu "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/update/updatemenu.sh"
-wget -O sl-fix "https://raw.githubusercontent.com/miftah06/Mantap-addon/main/sslh-fix/sl-fix"
+wget -O addhost "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/addhost.sh"
+wget -O newhost "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/newhost.sh"
+wget -O about "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/about.sh"
+wget -O menu "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/menu.sh"
+wget -O trial-menu "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trial/trial-menu.sh"
+wget -O addssh "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/addssh.sh"
+wget -O delssh "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/delssh.sh"
+wget -O member "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/member.sh"
+wget -O delexp "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/delexp.sh"
+wget -O cekssh "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/cekssh.sh"
+wget -O trial-ssh "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trial/trial-ssh.sh"
+wget -O trial-vmess "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trial/trial-vmess.sh"
+wget -O trial-vless "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trial/trial-vless.sh"
+wget -O trial-trojan "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trial/trial-trojan.sh"
+wget -O trial-trojango "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trial/trial-trojango.sh"
+wget -O trial-grpc "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trial/trial-grpc.sh"
+wget -O restart "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/restart.sh"
+wget -O speedtest "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/speedtest_cli.py"
+wget -O info "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/info.sh"
+wget -O ram "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/ram.sh"
+wget -O renewssh "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/renewssh.sh"
+wget -O autokill "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/autokill.sh"
+wget -O ceklim "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/ceklim.sh"
+wget -O tendang "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/tendang.sh"
+wget -O clearlog "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/clearlog.sh"
+wget -O changeport "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/changeport.sh"
+wget -O portovpn "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/portovpn.sh"
+#wget -O portwg "https://${akbarvpn}/portwg.sh"
+wget -O porttrojan "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/porttrojan.sh"
+#wget -O portsquid "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/portsquid.sh"
+wget -O portvlm "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/portvlm.sh"
+wget -O wbmn "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/webmin.sh"
+wget -O xp "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/xp.sh"
+wget -O tessh "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/tessh.sh"
+wget -O trj "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trj.sh"
+wget -O trjgo "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trjgo.sh"
+wget -O wss "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/wss.sh"
+wget -O vls "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/vls.sh"
+wget -O grpcc "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/grpcc.sh"
+wget -O swapkvm "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ssh/swapkvm.sh"
+wget -O addvmess "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/addv2ray.sh"
+wget -O addvless "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/addvless.sh"
+wget -O addtrojan "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/addtrojan.sh"
+wget -O addgrpc "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/grpc/addgrpc.sh"
+wget -O cekgrpc "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/grpc/cekgrpc.sh"
+wget -O delgrpc "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/grpc/delgrpc.sh"
+wget -O renewgrpc "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/grpc/renewgrpc.sh"
+wget -O delvmess "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/delv2ray.sh"
+wget -O delvless "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/delvless.sh"
+wget -O deltrojan "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/deltrojan.sh"
+wget -O cekvmess "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/cekv2ray.sh"
+wget -O cekvless "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/cekvless.sh"
+wget -O cektrojan "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/cektrojan.sh"
+wget -O renewvmess "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/renewv2ray.sh"
+wget -O renewvless "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/renewvless.sh"
+wget -O renewtrojan "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/renewtrojan.sh"
+wget -O certv2ray "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/xray/certv2ray.sh"
+wget -O addtrgo "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trojango/addtrgo.sh"
+wget -O deltrgo "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trojango/deltrgo.sh"
+wget -O renewtrgo "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trojango/renewtrgo.sh"
+wget -O cektrgo "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/trojango/cektrgo.sh"
+wget -O portsshnontls "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/websocket/portsshnontls.sh"
+wget -O portsshws "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/websocket/portsshws.sh"
 
-chmod +x sl-fix
-chmod +x ipsaya
-chmod +x sshovpnmenu
-chmod +x l2tpmenu
-chmod +x pptpmenu
-chmod +x sstpmenu
-chmod +x wgmenu
-chmod +x ssmenu
-chmod +x ssrmenu
-chmod +x vmessmenu
-chmod +x vlessmenu
-chmod +x grpcmenu
-chmod +x grpcupdate
-chmod +x trmenu
-chmod +x trgomenu
-chmod +x setmenu
-chmod +x slowdnsmenu
-chmod +x running
-chmod +x updatemenu
+wget -O ipsaya "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/ipsaya.sh"
+wget -O running "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/running.sh"
+wget -O sslh-fix "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/sslh/sslh-fix"
 
+chmod +x ipsaya && sed -i -e 's/\r$//' ipsaya
+chmod +x running && sed -i -e 's/\r$//' running
+chmod +x sslh-fix && sed -i -e 's/\r$//' sslh-fix
 
-chmod +x portsshnontls
-chmod +x portsshws
+chmod +x portsshnontls && sed -i -e 's/\r$//' portsshnontls
+chmod +x portsshws && sed -i -e 's/\r$//' portsshws
 
-chmod +x slhost
-chmod +x addhost
-chmod +x menu
-chmod +x addssh
-chmod +x trialssh
-chmod +x delssh
-chmod +x member
-chmod +x delexp
-chmod +x cekssh
-chmod +x restart
+chmod +x newhost && sed -i -e 's/\r$//' newhost
+chmod +x addhost && sed -i -e 's/\r$//' addhost
+chmod +x menu && sed -i -e 's/\r$//' menu
+chmod +x trial-menu && sed -i -e 's/\r$//' trial-menu
+chmod +x trial-ssh && sed -i -e 's/\r$//' trial-ssh
+chmod +x trial-vmess && sed -i -e 's/\r$//' trial-vmess
+chmod +x trial-vless && sed -i -e 's/\r$//' trial-vless
+chmod +x trial-trojan && sed -i -e 's/\r$//' trial-trojan
+chmod +x trial-trojango && sed -i -e 's/\r$//' trial-trojango
+chmod +x trial-grpc && sed -i -e 's/\r$//' trial-grpc
+chmod +x addssh && sed -i -e 's/\r$//' addssh
+chmod +x trialssh && sed -i -e 's/\r$//' trialssh
+chmod +x delssh && sed -i -e 's/\r$//' delssh
+chmod +x member && sed -i -e 's/\r$//' member
+chmod +x delexp && sed -i -e 's/\r$//' delexp
+chmod +x cekssh && sed -i -e 's/\r$//' cekssh
+chmod +x restart && sed -i -e 's/\r$//' restart
 chmod +x speedtest
 chmod +x info
 chmod +x about
-chmod +x autokill
-chmod +x tendang
-chmod +x ceklim
-chmod +x ram
-chmod +x renewssh
-chmod +x clearlog
-chmod +x changeport
-chmod +x portovpn
-chmod +x portwg
-chmod +x porttrojan
-chmod +x portsstp
-chmod +x portsquid
-chmod +x portvlm
-chmod +x wbmn
-chmod +x xp
-chmod +x swapkvm
-chmod +x addvmess
-chmod +x addvless
-chmod +x addtrojan
-chmod +x addgrpc
-chmod +x delgrpc
-chmod +x delvmess
-chmod +x delvless
-chmod +x deltrojan
-chmod +x cekgrpc
-chmod +x cekvmess
-chmod +x cekvless
-chmod +x cektrojan
-chmod +x renewgrpc
-chmod +x renewvmess
-chmod +x renewvless
-chmod +x renewtrojan
-chmod +x certv2ray
-chmod +x addtrgo
-chmod +x deltrgo
-chmod +x renewtrgo
-chmod +x cektrgo
+chmod +x autokill && sed -i -e 's/\r$//' autokill
+chmod +x tendang && sed -i -e 's/\r$//' tendang
+chmod +x ceklim && sed -i -e 's/\r$//' ceklim
+chmod +x ram && sed -i -e 's/\r$//' ram
+chmod +x renewssh && sed -i -e 's/\r$//' renewssh
+chmod +x clearlog && sed -i -e 's/\r$//' clearlog
+chmod +x changeport && sed -i -e 's/\r$//' changeport
+chmod +x portovpn && sed -i -e 's/\r$//' portovpn
+chmod +x porttrojan && sed -i -e 's/\r$//' porttrojan
+chmod +x portsquid && sed -i -e 's/\r$//' portsquid
+chmod +x portvlm && sed -i -e 's/\r$//' portvlm
+chmod +x wbmn && sed -i -e 's/\r$//' wbmn
+chmod +x xp && sed -i -e 's/\r$//' xp
+chmod +x tessh && sed -i -e 's/\r$//' tessh
+chmod +x trj && sed -i -e 's/\r$//' trj
+chmod +x trjgo && sed -i -e 's/\r$//' trjgo
+chmod +x wss && sed -i -e 's/\r$//' wss
+chmod +x vls && sed -i -e 's/\r$//' vls
+chmod +x grpcc && sed -i -e 's/\r$//' grpcc
+chmod +x swapkvm && sed -i -e 's/\r$//' swapkvm
+chmod +x addvmess && sed -i -e 's/\r$//' addvmess
+chmod +x addvless && sed -i -e 's/\r$//' addvless
+chmod +x addtrojan && sed -i -e 's/\r$//' addtrojan
+chmod +x addgrpc && sed -i -e 's/\r$//' addgrpc
+chmod +x delgrpc && sed -i -e 's/\r$//' delgrpc
+chmod +x delvmess && sed -i -e 's/\r$//' delvmess
+chmod +x delvless && sed -i -e 's/\r$//' delvless
+chmod +x deltrojan && sed -i -e 's/\r$//' deltrojan
+chmod +x cekgrpc && sed -i -e 's/\r$//' cekgrpc
+chmod +x cekvmess && sed -i -e 's/\r$//' cekvmess
+chmod +x cekvless && sed -i -e 's/\r$//' cekvless
+chmod +x cektrojan && sed -i -e 's/\r$//' cektrojan
+chmod +x renewgrpc && sed -i -e 's/\r$//' renewgrpc
+chmod +x renewvmess && sed -i -e 's/\r$//' renewvmess
+chmod +x renewvless && sed -i -e 's/\r$//' renewvless
+chmod +x renewtrojan && sed -i -e 's/\r$//' renewtrojan
+chmod +x certv2ray && sed -i -e 's/\r$//' certv2ray
+chmod +x addtrgo && sed -i -e 's/\r$//' addtrgo
+chmod +x deltrgo && sed -i -e 's/\r$//' deltrgo
+chmod +x renewtrgo && sed -i -e 's/\r$//' renewtrgo
+chmod +x cektrgo && sed -i -e 's/\r$//' cektrgo
+
 echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
 echo "0 0 * * * root xp" >> /etc/crontab
 echo "0 1 * * * root delexp" >> /etc/crontab

@@ -1,5 +1,5 @@
 #!/bin/bash
-# SL
+# Jagoanneon
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -14,12 +14,14 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck You!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
 clear
@@ -29,6 +31,7 @@ domain=$(cat /etc/xray/domain)
 else
 domain=$IP
 fi
+read -rp "Masukkan Bug: " -e bug
 tls="$(cat ~/log-install.txt | grep -w "Vless TLS" | cut -d: -f2|sed 's/ //g')"
 nontls="$(cat ~/log-install.txt | grep -w "Vless None TLS" | cut -d: -f2|sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
@@ -49,27 +52,41 @@ sed -i '/#xray-vless-tls$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#xray-vless-nontls$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-xrayvless1="vless://${uuid}@${domain}:$tls?path=/vless/&security=tls&encryption=none&type=ws#${user}"
-xrayvless2="vless://${uuid}@${domain}:$nontls?path=/vless/&encryption=none&type=ws#${user}"
+xrayvless1="vless://${uuid}@${domain}:$tls?path=/Ronggolawe&security=tls&encryption=none&type=ws#${user}"
+xrayvless2="vless://${uuid}@${domain}:$nontls?path=/Ronggolawe&encryption=none&type=ws#${user}"
 systemctl restart xray.service
 service cron restart
 clear
 echo -e ""
-echo -e "======-XRAYS/VLESS-======"
-echo -e "Remarks     : ${user}"
-echo -e "IP/Host     : ${MYIP}"
-echo -e "Address     : ${domain}"
-echo -e "Port TLS    : $tls"
-echo -e "Port No TLS : $nontls"
-echo -e "User ID     : ${uuid}"
-echo -e "Encryption  : none"
-echo -e "Network     : ws"
-echo -e "Path        : /vless/"
-echo -e "Created     : $hariini"
-echo -e "Expired     : $exp"
-echo -e "========================="
-echo -e "Link TLS    : ${xrayvless1}"
-echo -e "========================="
-echo -e "Link No TLS : ${xrayvless2}"
-echo -e "========================="
-echo -e "Script Mod By SL"
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}=•=•-xxx VLESS xxx-=•=•${NC}"
+echo -e "══════════════════════════" | lolcat
+echo -e "Remarks     : ${user}" | lolcat
+echo -e "IP/Host     : ${MYIP}" | lolcat
+echo -e "Address     : ${domain}" | lolcat
+echo -e "Port TLS    : $tls" | lolcat
+echo -e "Port No TLS : $nontls" | lolcat
+echo -e "User ID     : ${uuid}" | lolcat
+echo -e "Encryption  : none" | lolcat
+echo -e "Network     : ws" | lolcat
+echo -e "Bug.        : ${bug}" | lolcat
+echo -e "Path        : /Ronggolawe" | lolcat
+echo -e "Created     : $hariini" | lolcat
+echo -e "Expired     : $exp" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}Link TLS${NC}    : "
+echo -e "═════════════" | lolcat
+echo -e ">>> ${xrayvless1}" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}Link No TLS${NC} : "
+echo -e "═════════════" | lolcat
+echo -e " ${xrayvless2}" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
+echo -e "══════════════════════════" | lolcat
+echo -e""
+read -p "Ketik Enter Untuk Kembali Ke Menu...."
+sleep 1
+menu
+exit 0
+fi

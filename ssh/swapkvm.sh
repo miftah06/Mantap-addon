@@ -1,5 +1,5 @@
 #!/bin/bash
-# SL
+# JAGOANNEON
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -14,14 +14,19 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+sleep 1
+echo "Cek Izin Akses Script"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck You!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
+clear
 dd if=/dev/zero of=/swapfile1 bs=1024 count=524288
 dd if=/dev/zero of=/swapfile2 bs=1024 count=524288
 mkswap /swapfile1
@@ -37,3 +42,7 @@ sed -i '$ i\swapon /swapfile2' /etc/rc.local
 sed -i '$ i\/swapfile1      swap swap   defaults    0 0' /etc/fstab
 sed -i '$ i\/swapfile2      swap swap   defaults    0 0' /etc/fstab
 rm -f swapkvm.sh
+echo -e "Swap Memori Sukses Bossku....."
+sleep 1
+fi
+clear

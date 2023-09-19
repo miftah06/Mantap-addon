@@ -1,5 +1,5 @@
 #!/bin/bash
-# SL
+# Jagoanneon
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -14,12 +14,14 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck You!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083856228182"
 exit 0
 fi
 source /var/crot/ipvps.conf
@@ -29,6 +31,10 @@ else
 domain=$IP2
 fi
 clear
+domain=$(cat /etc/xray/domain)
+cdndomain=$(cat /root/cdndomain)
+dnsdomain=$(cat /root/nsdomain)
+dnskey=$(cat /etc/slowdns/server.pub)
 IP=$(wget -qO- ipinfo.io/ip);
 ssl="$(cat ~/log-install.txt | grep -w "Stunnel5" | cut -d: -f2)"
 sqd="$(cat ~/log-install.txt | grep -w "Squid" | cut -d: -f2)"
@@ -38,6 +44,16 @@ Login=Trial`</dev/urandom tr -dc X-Z0-9 | head -c4`
 hari="1"
 Pass=1
 clear
+systemctl stop client-sldns
+systemctl stop server-sldns
+pkill sldns-server
+pkill sldns-client
+systemctl enable client-sldns
+systemctl enable server-sldns
+systemctl start client-sldns
+systemctl start server-sldns
+systemctl restart client-sldns
+systemctl restart server-sldns
 systemctl restart ws-tls
 systemctl restart ws-nontls
 systemctl restart ssh-ohp
@@ -49,38 +65,65 @@ hariini=`date -d "0 days" +"%Y-%m-%d"`
 expi=`date -d "$masaaktif days" +"%Y-%m-%d"`
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 echo -e ""
-echo -e "Informasi Trial SSH & OpenVPN"
-echo -e "================================"
-echo -e "IP/Host            : $IP"
-echo -e "Domain             : $domain"
-echo -e "Username           : $Login"
-echo -e "Password           : $Pass"
-echo -e "OpenSSH            : 443, 22"
-echo -e "Dropbear           : 443, 109, 143"
-echo -e "SSL/TLS            :$ssl"
-echo -e "Port Squid         :$sqd"
-echo -e "OHP SSH            : 8181"
-echo -e "OHP Dropbear       : 8282"
-echo -e "OHP OpenVPN        : 8383"
-echo -e "SSH Websocket SSL  : 443"
-echo -e "SSH Websocket HTTP : 8880"
-echo -e "OVPN Websocket     : 2086"
-echo -e "OVPN Port TCP      : $ovpn"
-echo -e "OVPN Port UDP      : $ovpn2"
-echo -e "OVPN Port SSL      : 990"
-echo -e "OVPN TCP           : http://$IP:89/tcp.ovpn"
-echo -e "OVPN UDP           : http://$IP:89/udp.ovpn"
-echo -e "OVPN SSL           : http://$IP:89/ssl.ovpn"
-echo -e "BadVpn             : 7100-7200-7300"
-echo -e "Created            : $hariini"
-echo -e "Expired            : $expi"
-echo -e "=============================="
-echo -e "Payload Websocket SSL/TLS"
-echo -e "=============================="
-echo -e "GET wss://bug.com [protocol][crlf]Host: ${domain}[crlf]Upgrade: websocket[crlf][crlf]"
-echo -e "=============================="
-echo -e "Payload Websocket HTTP"
-echo -e "=============================="
-echo -e "GET / HTTP/1.1[crlf]Host: ${domain}[crlf]Upgrade: websocket[crlf][crlf]"
-echo -e "=============================="
-echo -e "Script Mod By SL"
+echo -e "═══════════════════════" | lolcat
+echo -e "Informasi TRIAL SSH & OpenVPN Premium By $domain" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "IP/Host             : $IP" | lolcat
+echo -e "Domain              : $domain" | lolcat
+echo -e "Username            : $Login" | lolcat
+echo -e "Password            : $Pass" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "NS (SlowDNS)        : $dnsdomain" | lolcat
+echo -e "DNS PUBLIC KEY      : $dnskey" | lolcat
+echo -e "=============Host=============" | lolcat
+echo -e "Host Domain (SSH)   : $domain" | lolcat
+echo -e "Host Domain (CDN)   : $cdndomain" | lolcat
+echo -e "Host NS (SlowDNS)   : $dnsdomain" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "SlowDNS             : 2222" | lolcat
+echo -e "OpenSSH             : 22" | lolcat
+echo -e "Dropbear            : 443, 109, 143" | lolcat
+echo -e "SSL/TLS             :$ssl" | lolcat
+echo -e "Proxy Squid         :$sqd" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "OHP SSH             : 8181" | lolcat
+echo -e "OHP Dropbear        : 8282" | lolcat
+echo -e "OHP OpenVPN         : 8383" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "SSH Websocket SSL   : 443" | lolcat
+echo -e "SSH Websocket HTTP  : 8880" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "OVPN Websocket      : 2086" | lolcat
+echo -e "OVPN Port TCP       : $ovpn" | lolcat
+echo -e "OVPN Port UDP       : $ovpn2" | lolcat
+echo -e "OVPN Port SSL       : 990" | lolcat
+echo -e "OVPN TCP            : http://$IP:89/tcp.ovpn" | lolcat
+echo -e "OVPN UDP            : http://$IP:89/udp.ovpn" | lolcat
+echo -e "OVPN SSL            : http://$IP:89/ssl.ovpn" | lolcat
+echo -e "BadVPN UDPGW        : 7100,7200,7300" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "SNI SSL/TLS         : ${bug}" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "PAYLOAD WS DB" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "GET / HTTP/1.1[crlf]Host: ${cdndomain}[crlf]Connection: Keep-Alive[crlf]User-Agent: [ua][crlf]Upgrade: websocket[crlf][crlf]" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "PAYLOAD WS SSL" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "GET ${cdndomain}://bug.com/ HTTP/1.1[crlf]Host: ${cdndomain}[crlf]Connection: Keep-Alive[crlf]User-Agent: [ua][crlf]Upgrade: websocket[crlf][crlf]" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "Created             : $hariini" | lolcat
+echo -e "Expired             : $expi" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "AutoScript By JAGOANNEON" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "~ Beli Dong Masa Engga Hehehe ~" | lolcat
+echo -e "~ Garansi 30Hari ~" | lolcat
+echo -e "~ Mulai Dari Tanggal Pembelian ~" | lolcat
+echo -e "~ Terimakasih Selamat Menikmati ~" | lolcat
+echo -e""
+read -p "Ketik Enter Untuk Kembali Ke Menu...."
+sleep 1
+menu
+exit 0
+fi

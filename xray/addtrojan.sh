@@ -1,5 +1,5 @@
 #!/bin/bash
-# SL
+# Jagoanneon
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -14,12 +14,14 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck You!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
 clear
@@ -29,9 +31,10 @@ domain=$(cat /etc/xray/domain)
 else
 domain=$IP
 fi
+read -rp "Masukkan Bug: " -e bug
 tr="$(cat ~/log-install.txt | grep -w "Trojan" | cut -d: -f2|sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
-		read -rp "miftah06/Mantap-main/masterrd : " -e user
+		read -rp "Password : " -e user
 		user_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
 
 		if [[ ${user_EXISTS} == '1' ]]; then
@@ -44,21 +47,34 @@ read -p "Expired (Days) : " masaaktif
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#xray-trojan$/a\#&# '"$user $exp"'\
-},{"miftah06/Mantap-main/masterrd": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
+},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
 systemctl restart xray.service
-trojanlink="trojan://${user}@${domain}:${tr}"
+trojanlink="trojan://${user}@${domain}:${tr}/${bug}"
+trojanlinkk="trojan://${user}@${MYIP}:${tr}/${bug}"
 service cron restart
 clear
 echo -e ""
-echo -e "======-XRAYS/TROJAN-======"
-echo -e "Remarks  : ${user}"
-echo -e "IP/Host  : ${MYIP}"
-echo -e "Address  : ${domain}"
-echo -e "Port     : ${tr}"
-echo -e "Key      : ${user}"
-echo -e "Created  : $hariini"
-echo -e "Expired  : $exp"
-echo -e "=========================="
-echo -e "Link TR  : ${trojanlink}"
-echo -e "=========================="
-echo -e "Script Mod By SL"
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}=•=•-xxx TROJAN-GFW   xxx-=•=•${NC}"
+echo -e "══════════════════════════" | lolcat
+echo -e "Remarks  : ${user}" | lolcat
+echo -e "IP/Host  : ${MYIP}" | lolcat
+echo -e "Address  : ${domain}" | lolcat
+echo -e "Port     : ${tr}" | lolcat
+echo -e "Key      : ${user}" | lolcat
+echo -e "Bug      : ${bug}" | lolcat
+echo -e "Created  : $hariini" | lolcat
+echo -e "Expired  : $exp" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "Link TR  : ${trojanlink}" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "Link TR IP  : ${trojanlinkk}" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
+echo -e "══════════════════════════" | lolcat
+echo -e""
+read -p "Ketik Enter Untuk Kembali Ke Menu...."
+sleep 1
+menu
+exit 0
+fi

@@ -1,5 +1,5 @@
 #!/bin/bash
-# SL
+# Jagoanneon
 # ==========================================
 # Color
 RED='\033[0;31m'
@@ -14,12 +14,14 @@ LIGHT='\033[0;37m'
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
-IZIN=$( curl ipinfo.io/ip | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
+IZIN=$( curl http://akses.jagoanneon-premium.xyz:81/akses | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${GREEN}Akses Di Izinkan...${NC}"
 else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Fuck You!!"
+echo -e "${RED}VPS tidak diijinkan${NC}";
+echo "Kontak Admin Untuk Mendapatkan Akses Script"
+echo "Facebook   : Generasi Ronggolawe Tuban"
+echo "WhatsApp   : 083857684916"
 exit 0
 fi
 clear
@@ -29,6 +31,7 @@ domain=$(cat /etc/xray/domain)
 else
 domain=$IP
 fi
+read -rp "Masukkan Bug: " -e bug
 tls="$(cat ~/log-install.txt | grep -w "Vmess TLS" | cut -d: -f2|sed 's/ //g')"
 nontls="$(cat ~/log-install.txt | grep -w "Vmess None TLS" | cut -d: -f2|sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
@@ -58,9 +61,9 @@ cat>/etc/xray/vmess-$user-tls.json<<EOF
       "id": "${uuid}",
       "aid": "0",
       "net": "ws",
-      "path": "/vmess/",
+      "path": "/Ronggolawe",
       "type": "none",
-      "host": "",
+      "host": "${bug}",
       "tls": "tls"
 }
 EOF
@@ -68,14 +71,14 @@ cat>/etc/xray/vmess-$user-nontls.json<<EOF
       {
       "v": "2",
       "ps": "${user}",
-      "add": "${domain}",
+      "add": "${bug}",
       "port": "${nontls}",
       "id": "${uuid}",
       "aid": "0",
       "net": "ws",
-      "path": "/vmess/",
+      "path": "/Ronggolawe",
       "type": "none",
-      "host": "",
+      "host": "${domain}",
       "tls": "none"
 }
 EOF
@@ -87,22 +90,55 @@ systemctl restart xray.service
 service cron restart
 clear
 echo -e ""
-echo -e "======-XRAYS/VMESS-======"
-echo -e "Remarks     : ${user}"
-echo -e "IP/Host     : ${MYIP}"
-echo -e "Address     : ${domain}"
-echo -e "Port TLS    : ${tls}"
-echo -e "Port No TLS : ${nontls}"
-echo -e "User ID     : ${uuid}"
-echo -e "Alter ID    : 0"
-echo -e "Security    : auto"
-echo -e "Network     : ws"
-echo -e "Path        : /vmess/"
-echo -e "Created     : $hariini"
-echo -e "Expired     : $exp"
-echo -e "========================="
-echo -e "Link TLS    : ${xrayv2ray1}"
-echo -e "========================="
-echo -e "Link No TLS : ${xrayv2ray2}"
-echo -e "========================="
-echo -e "Script Mod By SL"
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}=•=•-xxx VMESS xxx-=•=•${NC}"
+echo -e "══════════════════════════" | lolcat
+echo -e "Remarks     : ${user}" | lolcat
+echo -e "IP/Host     : ${MYIP}" | lolcat
+echo -e "Address     : ${domain}" | lolcat
+echo -e "Port TLS    : ${tls}" | lolcat
+echo -e "Port No TLS : ${nontls}" | lolcat
+echo -e "User ID     : ${uuid}" | lolcat
+echo -e "Alter ID    : 0" | lolcat
+echo -e "Security    : auto" | lolcat
+echo -e "Network     : ws" | lolcat
+echo -e "Bug         : ${bug}" | lolcat
+echo -e "Path        : /Ronggolawe" | lolcat
+echo -e "Created     : $hariini" | lolcat
+echo -e "Expired     : $exp" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}Link TLS${NC}    : "
+echo -e "═════════════" | lolcat
+echo -e ">>> ${xrayv2ray1}" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}Link Non TLS${NC} : "
+echo -e "═════════════" | lolcat
+echo -e ">>> ${xrayv2ray2}" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "xxxcxxxxx•Config Yaml•xxxxxxxxx" | lolcat
+echo -e "=================================" | lolcat
+echo -e "proxies:" | lolcat
+echo -e "  - name: Vmess✓" | lolcat
+echo -e "    server:${bug}" | lolcat
+echo -e "    port:${nontls}" | lolcat
+echo -e "    uuid:${uuid}" | lolcat
+echo -e "    alterId:0" | lolcat
+echo -e "    chipher:auto" | lolcat
+echo -e "    tls:no" | lolcat
+echo -e "    skip-cert-verify: true" | lolcat
+echo -e "    servername:null" | lolcat
+echo -e "    udp:true" | lolcat
+echo -e "    network:ws" | lolcat
+echo -e "    ws-path:/Ronggolawe" | lolcat
+echo -e "    ws-headers:" | lolcat
+echo -e "      Host: ${domain}" | lolcat
+echo -e "══════════════════════════" | lolcat
+echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
+echo -e "══════════════════════════" | lolcat
+echo -e""
+read -p "Ketik Enter Untuk Kembali Ke Menu...."
+sleep 1
+menu
+exit 0
+fi
